@@ -1077,6 +1077,208 @@ impl ConfigurationBuilder {
     self.insert("whileStatement.spaceAround", value.into())
   }
 
+  /* padding */
+
+  pub fn if_statement_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("ifStatement.padding.top", (value as i32).into())
+  }
+
+  pub fn if_statement_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("ifStatement.padding.bottom", (value as i32).into())
+  }
+
+  pub fn function_declaration_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("functionDeclaration.padding.top", (value as i32).into())
+  }
+
+  pub fn function_declaration_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("functionDeclaration.padding.bottom", (value as i32).into())
+  }
+
+  pub fn function_expression_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("functionExpression.padding.top", (value as i32).into())
+  }
+
+  pub fn function_expression_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("functionExpression.padding.bottom", (value as i32).into())
+  }
+
+  pub fn arrow_function_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("arrowFunction.padding.top", (value as i32).into())
+  }
+
+  pub fn arrow_function_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("arrowFunction.padding.bottom", (value as i32).into())
+  }
+
+  pub fn class_declaration_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("classDeclaration.padding.top", (value as i32).into())
+  }
+
+  pub fn class_declaration_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("classDeclaration.padding.bottom", (value as i32).into())
+  }
+
+  pub fn class_expression_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("classExpression.padding.top", (value as i32).into())
+  }
+
+  pub fn class_expression_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("classExpression.padding.bottom", (value as i32).into())
+  }
+
+  pub fn method_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("method.padding.top", (value as i32).into())
+  }
+
+  pub fn method_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("method.padding.bottom", (value as i32).into())
+  }
+
+  pub fn constructor_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("constructor.padding.top", (value as i32).into())
+  }
+
+  pub fn constructor_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("constructor.padding.bottom", (value as i32).into())
+  }
+
+  pub fn for_statement_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("forStatement.padding.top", (value as i32).into())
+  }
+
+  pub fn for_statement_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("forStatement.padding.bottom", (value as i32).into())
+  }
+
+  pub fn for_in_statement_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("forInStatement.padding.top", (value as i32).into())
+  }
+
+  pub fn for_in_statement_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("forInStatement.padding.bottom", (value as i32).into())
+  }
+
+  pub fn for_of_statement_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("forOfStatement.padding.top", (value as i32).into())
+  }
+
+  pub fn for_of_statement_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("forOfStatement.padding.bottom", (value as i32).into())
+  }
+
+  pub fn while_statement_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("whileStatement.padding.top", (value as i32).into())
+  }
+
+  pub fn while_statement_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("whileStatement.padding.bottom", (value as i32).into())
+  }
+
+  pub fn do_while_statement_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("doWhileStatement.padding.top", (value as i32).into())
+  }
+
+  pub fn do_while_statement_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("doWhileStatement.padding.bottom", (value as i32).into())
+  }
+
+  pub fn switch_statement_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("switchStatement.padding.top", (value as i32).into())
+  }
+
+  pub fn switch_statement_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("switchStatement.padding.bottom", (value as i32).into())
+  }
+
+  pub fn switch_case_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("switchCase.padding.top", (value as i32).into())
+  }
+
+  pub fn switch_case_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("switchCase.padding.bottom", (value as i32).into())
+  }
+
+  pub fn try_statement_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("tryStatement.padding.top", (value as i32).into())
+  }
+
+  pub fn try_statement_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("tryStatement.padding.bottom", (value as i32).into())
+  }
+
+  pub fn catch_clause_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("catchClause.padding.top", (value as i32).into())
+  }
+
+  pub fn catch_clause_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("catchClause.padding.bottom", (value as i32).into())
+  }
+
+  pub fn finally_clause_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("finallyClause.padding.top", (value as i32).into())
+  }
+
+  pub fn finally_clause_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("finallyClause.padding.bottom", (value as i32).into())
+  }
+
+  pub fn block_statement_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("blockStatement.padding.top", (value as i32).into())
+  }
+
+  pub fn block_statement_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("blockStatement.padding.bottom", (value as i32).into())
+  }
+
+  pub fn enum_declaration_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("enumDeclaration.padding.top", (value as i32).into())
+  }
+
+  pub fn enum_declaration_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("enumDeclaration.padding.bottom", (value as i32).into())
+  }
+
+  pub fn interface_declaration_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("interfaceDeclaration.padding.top", (value as i32).into())
+  }
+
+  pub fn interface_declaration_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("interfaceDeclaration.padding.bottom", (value as i32).into())
+  }
+
+  pub fn module_declaration_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("moduleDeclaration.padding.top", (value as i32).into())
+  }
+
+  pub fn module_declaration_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("moduleDeclaration.padding.bottom", (value as i32).into())
+  }
+
+  pub fn object_literal_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("objectLiteral.padding.top", (value as i32).into())
+  }
+
+  pub fn object_literal_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("objectLiteral.padding.bottom", (value as i32).into())
+  }
+
+  pub fn array_literal_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("arrayLiteral.padding.top", (value as i32).into())
+  }
+
+  pub fn array_literal_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("arrayLiteral.padding.bottom", (value as i32).into())
+  }
+
+  pub fn static_block_padding_top(&mut self, value: u8) -> &mut Self {
+    self.insert("staticBlock.padding.top", (value as i32).into())
+  }
+
+  pub fn static_block_padding_bottom(&mut self, value: u8) -> &mut Self {
+    self.insert("staticBlock.padding.bottom", (value as i32).into())
+  }
+
   #[cfg(test)]
   pub(super) fn get_inner_config(&self) -> ConfigKeyMap {
     self.config.clone()
@@ -1294,10 +1496,61 @@ mod tests {
       .paren_expression_space_around(true)
       .switch_statement_space_around(true)
       .tuple_type_space_around(true)
-      .while_statement_space_around(true);
+      .while_statement_space_around(true)
+      /* padding */
+      .if_statement_padding_top(0)
+      .if_statement_padding_bottom(0)
+      .function_declaration_padding_top(0)
+      .function_declaration_padding_bottom(0)
+      .function_expression_padding_top(0)
+      .function_expression_padding_bottom(0)
+      .arrow_function_padding_top(0)
+      .arrow_function_padding_bottom(0)
+      .class_declaration_padding_top(0)
+      .class_declaration_padding_bottom(0)
+      .class_expression_padding_top(0)
+      .class_expression_padding_bottom(0)
+      .method_padding_top(0)
+      .method_padding_bottom(0)
+      .constructor_padding_top(0)
+      .constructor_padding_bottom(0)
+      .for_statement_padding_top(0)
+      .for_statement_padding_bottom(0)
+      .for_in_statement_padding_top(0)
+      .for_in_statement_padding_bottom(0)
+      .for_of_statement_padding_top(0)
+      .for_of_statement_padding_bottom(0)
+      .while_statement_padding_top(0)
+      .while_statement_padding_bottom(0)
+      .do_while_statement_padding_top(0)
+      .do_while_statement_padding_bottom(0)
+      .switch_statement_padding_top(0)
+      .switch_statement_padding_bottom(0)
+      .switch_case_padding_top(0)
+      .switch_case_padding_bottom(0)
+      .try_statement_padding_top(0)
+      .try_statement_padding_bottom(0)
+      .catch_clause_padding_top(0)
+      .catch_clause_padding_bottom(0)
+      .finally_clause_padding_top(0)
+      .finally_clause_padding_bottom(0)
+      .block_statement_padding_top(0)
+      .block_statement_padding_bottom(0)
+      .enum_declaration_padding_top(0)
+      .enum_declaration_padding_bottom(0)
+      .interface_declaration_padding_top(0)
+      .interface_declaration_padding_bottom(0)
+      .module_declaration_padding_top(0)
+      .module_declaration_padding_bottom(0)
+      .object_literal_padding_top(0)
+      .object_literal_padding_bottom(0)
+      .array_literal_padding_top(0)
+      .array_literal_padding_bottom(0)
+      .static_block_padding_top(0)
+      .static_block_padding_bottom(0);
 
     let inner_config = config.get_inner_config();
-    assert_eq!(inner_config.len(), 182);
+    assert_eq!(inner_config.len(), 232);
     let diagnostics = resolve_config(inner_config, &Default::default()).diagnostics;
     assert_eq!(diagnostics.len(), 0);
   }
