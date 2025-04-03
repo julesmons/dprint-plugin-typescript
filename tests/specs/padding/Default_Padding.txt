@@ -1,0 +1,37 @@
+== No padding (Default) ==
+if (true) {
+    doSomething();
+}
+function test() {
+    return 5;
+}
+class Test {
+    method() {
+        console.log("test");
+    }
+}
+const obj = {
+    prop: 1
+};
+const arr = [
+    1
+];
+
+[expect]
+if (true) {
+    doSomething();
+}
+function test() {
+    return 5;
+}
+class Test {
+    method() {
+        console.log("test");
+    }
+}
+const obj = {
+    prop: 1,
+};
+const arr = [
+    1,
+];

@@ -1,0 +1,28 @@
+~~ switchCase.padding.top: 1, switchCase.padding.bottom: 1 ~~
+== switch case padding ==
+switch(val) {
+    case 1: {
+        break;
+    }
+    case 2: {/* c */}
+    case 3: {}
+    case 4: {
+        // c
+    }
+}
+
+[expect]
+switch (val) {
+    case 1: {
+
+        break;
+
+    }
+    case 2: {/* c */}
+    case 3: {}
+    case 4: {
+
+        // c
+
+    }
+}

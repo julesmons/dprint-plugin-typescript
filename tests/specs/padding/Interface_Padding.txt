@@ -1,0 +1,24 @@
+~~ interfaceDeclaration.padding.top: 1, interfaceDeclaration.padding.bottom: 1 ~~
+== interface padding ==
+interface Test {
+    a: string;
+}
+interface Test2 {}
+interface Test3 {/* c */}
+interface Test4 {
+    // c
+}
+
+[expect]
+interface Test {
+
+    a: string;
+
+}
+interface Test2 {}
+interface Test3 {/* c */}
+interface Test4 {
+
+    // c
+
+}

@@ -1,0 +1,28 @@
+~~ classDeclaration.padding.top: 1, classDeclaration.padding.bottom: 1 ~~
+== classDeclaration.padding.top: 1, classDeclaration.padding.bottom: 1 ==
+class Test {
+    method() {
+        console.log("test");
+    }
+}
+class Test2 {/* comment */}
+class Test3 {}
+class Test4 {
+    // comment
+}
+
+[expect]
+class Test {
+
+    method() {
+        console.log("test");
+    }
+
+}
+class Test2 {/* comment */}
+class Test3 {}
+class Test4 {
+
+    // comment
+
+}

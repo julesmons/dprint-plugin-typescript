@@ -1,0 +1,24 @@
+~~ enumDeclaration.padding.top: 1, enumDeclaration.padding.bottom: 1 ~~
+== enum padding ==
+enum Test {
+    A
+}
+enum Test2 {}
+enum Test3 {/* c */}
+enum Test4 {
+    // c
+}
+
+[expect]
+enum Test {
+
+    A,
+
+}
+enum Test2 {}
+enum Test3 {/* c */}
+enum Test4 {
+
+    // c
+
+}

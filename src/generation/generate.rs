@@ -953,6 +953,16 @@ fn gen_class_decl_or_expr<'a>(node: ClassDeclOrExpr<'a>, context: &mut Context<'
           brace_position: node.brace_position,
           should_use_blank_line: move |previous, next, context| node_helpers::has_separating_blank_line(&previous, &next, context.program),
           separator: Separator::none(),
+          padding_top: if node.is_class_decl {
+            context.config.class_declaration_padding_top
+          } else {
+            context.config.class_expression_padding_top
+          },
+          padding_bottom: if node.is_class_decl {
+            context.config.class_declaration_padding_bottom
+          } else {
+            context.config.class_expression_padding_bottom
+          },
         },
         context,
       )
@@ -1039,6 +1049,8 @@ fn gen_enum_decl<'a>(node: &TsEnumDecl<'a>, context: &mut Context<'a>) -> PrintI
         MemberSpacing::Maintain => node_helpers::has_separating_blank_line(&previous, &next, context.program),
       },
       separator: context.config.enum_declaration_trailing_commas.into(),
+      padding_top: context.config.enum_declaration_padding_top,
+      padding_bottom: context.config.enum_declaration_padding_bottom,
     },
     context,
   ));
@@ -1458,6 +1470,8 @@ fn gen_module_or_namespace_decl<'a, 'b>(node: ModuleOrNamespaceDecl<'a, 'b>, con
               brace_position: context.config.module_declaration_brace_position,
               should_use_blank_line: move |previous, next, context| node_helpers::has_separating_blank_line(&previous, &next, context.program),
               separator: Separator::none(),
+              padding_top: context.config.module_declaration_padding_top,
+              padding_bottom: context.config.module_declaration_padding_bottom,
             },
             context,
           ));
@@ -1534,6 +1548,8 @@ fn gen_named_import_or_export_specifiers<'a>(opts: GenNamedImportOrExportSpecifi
       surround_single_line_with_spaces: get_use_space(opts.parent, context),
       allow_blank_lines: false,
       node_sorter: get_node_sorter(opts.parent, context),
+      padding_top: 0,
+      padding_bottom: 0,
     },
     context,
   );
@@ -1604,6 +1620,8 @@ fn gen_array_expr<'a>(node: &ArrayLit<'a>, context: &mut Context<'a>) -> PrintIt
       prefer_single_line: context.config.array_expression_prefer_single_line,
       trailing_commas: context.config.array_expression_trailing_commas,
       space_around: context.config.array_expression_space_around,
+      padding_top: context.config.array_literal_padding_top,
+      padding_bottom: context.config.array_literal_padding_bottom,
     },
     context,
   )
@@ -2806,6 +2824,8 @@ fn gen_object_lit<'a>(node: &ObjectLit<'a>, context: &mut Context<'a>) -> PrintI
           surround_single_line_with_spaces: context.config.object_expression_space_surrounding_properties,
           allow_blank_lines: true,
           node_sorter: None,
+          padding_top: context.config.object_literal_padding_top,
+          padding_bottom: context.config.object_literal_padding_bottom,
         },
         context,
       )
@@ -3548,6 +3568,8 @@ fn gen_interface_body<'a>(node: &TsInterfaceBody<'a>, context: &mut Context<'a>)
           brace_position: context.config.interface_declaration_brace_position,
           should_use_blank_line: move |previous, next, context| node_helpers::has_separating_blank_line(&previous, &next, context.program),
           separator: context.config.semi_colons.into(),
+          padding_top: context.config.interface_declaration_padding_top,
+          padding_bottom: context.config.interface_declaration_padding_bottom,
         },
         context,
       )
@@ -3627,6 +3649,9 @@ fn gen_type_lit<'a>(node: &TsTypeLit<'a>, context: &mut Context<'a>) -> PrintIte
           surround_single_line_with_spaces: context.config.type_literal_space_surrounding_properties,
           allow_blank_lines: true,
           node_sorter: None,
+          // Note: Using object literal padding config for type literals
+          padding_top: context.config.object_literal_padding_top,
+          padding_bottom: context.config.object_literal_padding_bottom,
         },
         context,
       )
@@ -4269,6 +4294,8 @@ fn gen_array_pat<'a>(node: &ArrayPat<'a>, context: &mut Context<'a>) -> PrintIte
       prefer_single_line: context.config.array_pattern_prefer_single_line,
       trailing_commas: context.config.array_pattern_trailing_commas,
       space_around: context.config.array_pattern_space_around,
+      padding_top: context.config.array_literal_padding_top, // Use array literal config for patterns
+      padding_bottom: context.config.array_literal_padding_bottom,
     },
     context,
   ));
@@ -4324,6 +4351,8 @@ fn gen_object_pat<'a>(node: &ObjectPat<'a>, context: &mut Context<'a>) -> PrintI
       surround_single_line_with_spaces: context.config.object_pattern_space_surrounding_properties,
       allow_blank_lines: true,
       node_sorter: None,
+      padding_top: context.config.object_literal_padding_top, // Use object literal config for patterns
+      padding_bottom: context.config.object_literal_padding_bottom,
     },
     context,
   ));
@@ -4527,6 +4556,8 @@ fn gen_block_stmt<'a>(node: &BlockStmt<'a>, context: &mut Context<'a>) -> PrintI
     GenBlockOptions {
       range: Some(node.range()),
       children: node.stmts.iter().map(|x| x.into()).collect(),
+      padding_top: context.config.block_statement_padding_top,
+      padding_bottom: context.config.block_statement_padding_bottom,
     },
     context,
   )
@@ -5189,6 +5220,8 @@ fn gen_switch_stmt<'a>(node: &SwitchStmt<'a>, context: &mut Context<'a>) -> Prin
         previous_end_line + 1 < next.start_line_fast(context.program)
       },
       separator: Separator::none(),
+      padding_top: context.config.switch_statement_padding_top,
+      padding_bottom: context.config.switch_statement_padding_bottom,
     },
     context,
   ));
@@ -5911,6 +5944,8 @@ fn gen_ts_import_call_options<'a>(node: &TsImportCallOptions<'a>, context: &mut 
       prefer_single_line_when_empty: false,
       allow_open_token_trailing_comments: true,
       single_line_space_around: false,
+      padding_top: 0,
+      padding_bottom: 0,
     },
     context,
   )
@@ -6060,6 +6095,8 @@ fn gen_mapped_type<'a>(node: &TsMappedType<'a>, context: &mut Context<'a>) -> Pr
       prefer_single_line_when_empty: false,
       allow_open_token_trailing_comments: true,
       single_line_space_around: false,
+      padding_top: 0,
+      padding_bottom: 0,
     },
     context,
   ));
@@ -6146,6 +6183,8 @@ fn gen_tuple_type<'a>(node: &TsTupleType<'a>, context: &mut Context<'a>) -> Prin
       prefer_single_line: context.config.tuple_type_prefer_single_line,
       trailing_commas: context.config.tuple_type_trailing_commas,
       space_around: context.config.tuple_type_space_around,
+      padding_top: context.config.array_literal_padding_top, // Use array literal config for tuples
+      padding_bottom: context.config.array_literal_padding_bottom,
     },
     context,
   )
@@ -6943,6 +6982,8 @@ struct GenArrayLikeNodesOptions<'a> {
   prefer_single_line: bool,
   space_around: bool,
   trailing_commas: TrailingCommas,
+  padding_top: u8,
+  padding_bottom: u8,
 }
 
 fn gen_array_like_nodes<'a>(opts: GenArrayLikeNodesOptions<'a>, context: &mut Context<'a>) -> PrintItems {
@@ -7007,6 +7048,8 @@ fn gen_array_like_nodes<'a>(opts: GenArrayLikeNodesOptions<'a>, context: &mut Co
       prefer_single_line_when_empty: true,
       allow_open_token_trailing_comments: true,
       single_line_space_around: false,
+      padding_top: opts.padding_top,
+      padding_bottom: opts.padding_bottom,
     },
     context,
   ));
@@ -7052,6 +7095,8 @@ where
   brace_position: BracePosition,
   should_use_blank_line: FShouldUseBlankLine,
   separator: Separator,
+  padding_top: u8,
+  padding_bottom: u8,
 }
 
 fn gen_membered_body<'a, FShouldUseBlankLine>(opts: GenMemberedBodyOptions<'a, FShouldUseBlankLine>, context: &mut Context<'a>) -> PrintItems
@@ -7100,6 +7145,8 @@ where
     GenBlockOptions {
       range: Some(SourceRange::new(open_brace_token.start(), close_brace_token.end())),
       children: opts.members,
+      padding_top: opts.padding_top,
+      padding_bottom: opts.padding_bottom,
     },
     context,
   ));
@@ -7502,6 +7549,8 @@ where
       prefer_single_line_when_empty: true,
       allow_open_token_trailing_comments: true,
       single_line_space_around: false,
+      padding_top: 0,
+      padding_bottom: 0,
     },
     context,
   );
@@ -8015,6 +8064,8 @@ fn gen_node_in_parens<'a>(gen_node: impl FnOnce(&mut Context<'a>) -> PrintItems,
       prefer_single_line_when_empty: true,
       allow_open_token_trailing_comments: opts.allow_open_paren_trailing_comments,
       single_line_space_around: opts.single_line_space_around,
+      padding_top: 0,
+      padding_bottom: 0,
     },
     context,
   );
@@ -8101,6 +8152,8 @@ struct GenObjectLikeNodeOptions<'a> {
   surround_single_line_with_spaces: bool,
   allow_blank_lines: bool,
   node_sorter: Option<Box<dyn Fn((usize, Option<Node<'a>>), (usize, Option<Node<'a>>), Program<'a>) -> std::cmp::Ordering>>,
+  padding_top: u8,
+  padding_bottom: u8,
 }
 
 fn gen_object_like_node<'a>(opts: GenObjectLikeNodeOptions<'a>, context: &mut Context<'a>) -> PrintItems {
@@ -8153,6 +8206,8 @@ fn gen_object_like_node<'a>(opts: GenObjectLikeNodeOptions<'a>, context: &mut Co
       prefer_single_line_when_empty: true,
       allow_open_token_trailing_comments: true,
       single_line_space_around: false,
+      padding_top: opts.padding_top,
+      padding_bottom: opts.padding_bottom,
     },
     context,
   ));
@@ -8301,6 +8356,8 @@ fn gen_computed_prop_like<'a>(
       prefer_single_line_when_empty: false,
       allow_open_token_trailing_comments: true,
       single_line_space_around: false,
+      padding_top: 0,
+      padding_bottom: 0,
     },
     context,
   ));
@@ -8514,7 +8571,54 @@ struct GenConditionalBraceBodyResult {
 }
 
 fn gen_conditional_brace_body<'a>(opts: GenConditionalBraceBodyOptions<'a>, context: &mut Context<'a>) -> GenConditionalBraceBodyResult {
-  // todo: reorganize...
+  // Helper functions for padding logic - defined as closures to capture scope
+  let get_padding_top_for_conditional = |parent_node: Option<Node>, body_start_pos: SourcePos, context: &Context| -> u8 {
+    match parent_node.map(|n| n.kind()) {
+      Some(NodeKind::IfStmt) => context.config.if_statement_padding_top,
+      Some(NodeKind::ForStmt) => context.config.for_statement_padding_top,
+      Some(NodeKind::ForInStmt) => context.config.for_in_statement_padding_top,
+      Some(NodeKind::ForOfStmt) => context.config.for_of_statement_padding_top,
+      Some(NodeKind::WhileStmt) => context.config.while_statement_padding_top,
+      Some(NodeKind::DoWhileStmt) => context.config.do_while_statement_padding_top,
+      Some(NodeKind::TryStmt) => context.config.try_statement_padding_top,
+      Some(NodeKind::CatchClause) => context.config.catch_clause_padding_top,
+      // Note: SwitchCase body generation is handled differently, not via gen_conditional_brace_body
+      Some(NodeKind::SwitchCase) => context.config.switch_case_padding_top,
+      // For finally clause, the body_node's parent is the TryStmt
+      _ => {
+        if let Some(Node::TryStmt(try_stmt)) = parent_node {
+          if try_stmt.finalizer.map(|f| f.start()) == Some(body_start_pos) {
+            return context.config.finally_clause_padding_top;
+          }
+        }
+        0 // Default for unexpected parents or non-block finally
+      }
+    }
+  };
+
+  let get_padding_bottom_for_conditional = |parent_node: Option<Node>, body_start_pos: SourcePos, context: &Context| -> u8 {
+    match parent_node.map(|n| n.kind()) {
+      Some(NodeKind::IfStmt) => context.config.if_statement_padding_bottom,
+      Some(NodeKind::ForStmt) => context.config.for_statement_padding_bottom,
+      Some(NodeKind::ForInStmt) => context.config.for_in_statement_padding_bottom,
+      Some(NodeKind::ForOfStmt) => context.config.for_of_statement_padding_bottom,
+      Some(NodeKind::WhileStmt) => context.config.while_statement_padding_bottom,
+      Some(NodeKind::DoWhileStmt) => context.config.do_while_statement_padding_bottom,
+      Some(NodeKind::TryStmt) => context.config.try_statement_padding_bottom,
+      Some(NodeKind::CatchClause) => context.config.catch_clause_padding_bottom,
+      Some(NodeKind::SwitchCase) => context.config.switch_case_padding_bottom,
+      _ => {
+        if let Some(Node::TryStmt(try_stmt)) = parent_node {
+          if try_stmt.finalizer.map(|f| f.start()) == Some(body_start_pos) {
+            return context.config.finally_clause_padding_bottom;
+          }
+        }
+        0
+      }
+    }
+  };
+  // End helper functions
+
   let start_lc = LineAndColumn::new("start");
   let end_ln = LineNumber::new("end");
   let start_header_ln = opts.start_header_info.map(|v| v.0);
@@ -8530,6 +8634,13 @@ fn gen_conditional_brace_body<'a>(opts: GenConditionalBraceBodyOptions<'a>, cont
   let open_brace_token = get_open_brace_token(opts.body_node, context);
   let use_braces = opts.use_braces;
   let is_body_empty_stmt = opts.body_node.kind() == NodeKind::EmptyStmt;
+  let body_node_start_pos = opts.body_node.start(); // Store for use in padding closures
+
+  // Define this condition resolver early, as it's needed for padding checks
+  let is_inner_content_empty_cond_resolver = Rc::new(move |ctx: &mut ConditionResolverContext| -> Option<bool> {
+    condition_helpers::are_line_and_columns_equal(ctx, start_statements_lc, end_statements_lc)
+  });
+
   let mut inner_brace_space_condition = if_true(
     "spaceCondition",
     Rc::new(move |condition_context| {
@@ -8654,6 +8765,32 @@ fn gen_conditional_brace_body<'a>(opts: GenConditionalBraceBodyOptions<'a>, cont
     items.push_signal(Signal::FinishForceNoNewLines);
   }
   items.push_condition(newline_condition);
+
+  // Top Padding
+  let parent_node_for_padding = opts.body_node.parent(); // Parent of the BlockStmt or the Stmt itself
+  let padding_top = get_padding_top_for_conditional(parent_node_for_padding, body_node_start_pos, context);
+  if padding_top > 0 {
+    items.push_condition(if_true(
+      "paddingTopConditional",
+      // Only add padding if braces are used AND the generated inner content won't be empty
+      {
+        let open_brace_cond_ref = open_brace_condition_ref.clone();
+        let is_inner_content_empty = is_inner_content_empty_cond_resolver.clone();
+        Rc::new(move |ctx: &mut ConditionResolverContext| -> Option<bool> {
+          // Use `?` directly on the Option returned by resolved_condition
+          Some(ctx.resolved_condition(&open_brace_cond_ref)? && !is_inner_content_empty(ctx)?)
+        })
+      },
+      {
+        let mut padding_items = PrintItems::new();
+        for _ in 0..padding_top {
+          padding_items.push_signal(Signal::NewLine);
+        }
+        padding_items
+      },
+    ));
+  }
+
   items.push_line_and_column(start_statements_lc);
   if !is_body_empty_stmt {
     items.push_condition(if_true(
@@ -8671,7 +8808,12 @@ fn gen_conditional_brace_body<'a>(opts: GenConditionalBraceBodyOptions<'a>, cont
       items.extend(gen_leading_comments(&body_node.range(), context));
       let inner_range = body_node.get_inner_range(context);
       if body_node.stmts.is_empty() {
-        let trailing_comments_same_line = get_trailing_comments_on_same_line(&inner_range.start().range(), context);
+        // Provide the missing CommentsIterator argument
+        let trailing_comments_same_line = get_trailing_comments_same_line(
+          &inner_range.start().range(),
+          inner_range.start().trailing_comments_fast(context.program), // Added argument
+          context,
+        );
         items.extend(gen_comments_same_line(trailing_comments_same_line, context));
         // treat the remaining unhandled comments as statements
         items.extend(gen_comments_as_statements(
@@ -8680,6 +8822,7 @@ fn gen_conditional_brace_body<'a>(opts: GenConditionalBraceBodyOptions<'a>, cont
           context,
         ));
       } else {
+        // Generate inner statements directly
         items.extend(gen_statements(inner_range, body_node.stmts.iter().map(|x| x.into()).collect(), context));
       }
       items
@@ -8695,6 +8838,31 @@ fn gen_conditional_brace_body<'a>(opts: GenConditionalBraceBodyOptions<'a>, cont
   }
 
   items.push_line_and_column(end_statements_lc);
+
+  // Bottom Padding
+  let padding_bottom = get_padding_bottom_for_conditional(parent_node_for_padding, body_node_start_pos, context);
+  if padding_bottom > 0 {
+    items.push_condition(if_true(
+      "paddingBottomConditional",
+      // Only add padding if braces are used AND the generated inner content wasn't empty
+      {
+        let open_brace_cond_ref = open_brace_condition_ref.clone();
+        let is_inner_content_empty = is_inner_content_empty_cond_resolver.clone();
+        Rc::new(move |ctx: &mut ConditionResolverContext| -> Option<bool> {
+          // Use `?` directly on the Option returned by resolved_condition
+          Some(ctx.resolved_condition(&open_brace_cond_ref)? && !is_inner_content_empty(ctx)?)
+        })
+      },
+      {
+        let mut padding_items = PrintItems::new();
+        for _ in 0..padding_bottom {
+          padding_items.push_signal(Signal::NewLine);
+        }
+        padding_items
+      },
+    ));
+  }
+
   let mut close_brace_condition = if_true(
     "closeBrace",
     Rc::new(move |condition_context| condition_context.resolved_condition(&open_brace_condition_ref)),
@@ -9323,6 +9491,8 @@ fn gen_assignment_like_with_token<'a>(expr: Node<'a>, op: &'static StringContain
 struct GenBlockOptions<'a> {
   range: Option<SourceRange>,
   children: Vec<Node<'a>>,
+  padding_top: u8,
+  padding_bottom: u8,
 }
 
 fn gen_block<'a>(gen_inner: impl FnOnce(Vec<Node<'a>>, &mut Context<'a>) -> PrintItems, opts: GenBlockOptions<'a>, context: &mut Context<'a>) -> PrintItems {
@@ -9372,6 +9542,8 @@ fn gen_block<'a>(gen_inner: impl FnOnce(Vec<Node<'a>>, &mut Context<'a>) -> Prin
       prefer_single_line_when_empty: false,
       allow_open_token_trailing_comments: true,
       single_line_space_around: false,
+      padding_top: opts.padding_top,
+      padding_bottom: opts.padding_bottom,
     },
     context,
   ));
@@ -9387,6 +9559,8 @@ struct GenSurroundedByTokensOptions {
   prefer_single_line_when_empty: bool,
   allow_open_token_trailing_comments: bool,
   single_line_space_around: bool,
+  padding_top: u8,
+  padding_bottom: u8,
 }
 
 fn gen_surrounded_by_tokens<'a>(
@@ -9396,6 +9570,12 @@ fn gen_surrounded_by_tokens<'a>(
   context: &mut Context<'a>,
 ) -> PrintItems {
   let mut items = PrintItems::new();
+  let before_open_token_ln = LineNumber::new("beforeOpenToken");
+  let before_close_token_ln = LineNumber::new("beforeCloseToken"); // Used for multi-line check
+
+  items.push_anchor(LineNumberAnchor::new(before_close_token_ln));
+  items.push_info(before_open_token_ln);
+
   if let Some(range) = opts.range {
     let open_token_end = range.start() + opts.open_token.text.len();
     let close_token_start = range.end() - opts.close_token.text.len();
@@ -9427,10 +9607,76 @@ fn gen_surrounded_by_tokens<'a>(
           context,
         ));
       }
+
+      let before_inner_lc = LineAndColumn::new("beforeInnerGen");
+      let after_inner_lc = LineAndColumn::new("afterInnerGen");
+      let is_multi_line_cond_resolver = Rc::new(move |ctx: &mut ConditionResolverContext| -> Option<bool> {
+        let start_line = ctx.resolved_line_number(before_open_token_ln)?;
+        let end_line = ctx.resolved_line_number(before_close_token_ln)?;
+        Some(start_line < end_line)
+      });
+      // Check if inner content is empty requires evaluating after generation.
+      // We create a condition that checks if the start and end points of the inner content are the same.
+      let is_inner_content_empty_cond_resolver = Rc::new(move |ctx: &mut ConditionResolverContext| -> Option<bool> {
+        condition_helpers::are_line_and_columns_equal(ctx, before_inner_lc, after_inner_lc)
+      });
+      let is_not_empty = opts.first_member.is_some(); // Use first_member as a *hint* for non-empty
+
+      // Top Padding
+      if opts.padding_top > 0 {
+        let padding_top = opts.padding_top;
+        items.push_condition(if_true(
+          "paddingTop",
+          {
+            let is_multi_line = is_multi_line_cond_resolver.clone();
+            let is_inner_content_empty = is_inner_content_empty_cond_resolver.clone();
+            Rc::new(move |ctx: &mut ConditionResolverContext| -> Option<bool> {
+              // Only add padding if multi-line and the *generated* inner content won't be empty.
+              // Using `is_not_empty` (from AST) is an optimization hint, but the final check
+              // must be `!is_inner_content_empty(ctx)?` which checks the actual output.
+              Some(is_not_empty && is_multi_line(ctx)? && !is_inner_content_empty(ctx)?)
+            })
+          },
+          {
+            let mut items = PrintItems::new();
+            for _ in 0..padding_top {
+              items.push_signal(Signal::NewLine);
+            }
+            items
+          },
+        ));
+      }
+
+      items.push_line_and_column(before_inner_lc);
       items.extend(gen_inner(context));
+      items.push_line_and_column(after_inner_lc);
+
+      // Bottom Padding
+      if opts.padding_bottom > 0 {
+        let padding_bottom = opts.padding_bottom;
+        items.push_condition(if_true(
+          "paddingBottom",
+          {
+            let is_multi_line = is_multi_line_cond_resolver.clone();
+            let is_inner_content_empty = is_inner_content_empty_cond_resolver.clone();
+            Rc::new(move |ctx: &mut ConditionResolverContext| -> Option<bool> {
+              // Only add padding if multi-line and the *generated* inner content wasn't empty.
+              Some(is_not_empty && is_multi_line(ctx)? && !is_inner_content_empty(ctx)?)
+            })
+          },
+          {
+            let mut items = PrintItems::new();
+            for _ in 0..padding_bottom {
+              items.push_signal(Signal::NewLine);
+            }
+            items
+          },
+        ));
+      }
 
       let before_trailing_comments_lc = LineAndColumn::new("beforeTrailingComments");
       items.push_line_and_column(before_trailing_comments_lc);
+
       items.extend(with_indent(gen_trailing_comments_as_statements(&open_token_end.range(), context)));
       items.extend(with_indent(gen_comments_as_statements(
         close_token_start.leading_comments_fast(context.program),
@@ -9514,8 +9760,12 @@ fn gen_surrounded_by_tokens<'a>(
   } else {
     // todo: have a warning here when this happens
     items.push_sc(opts.open_token);
+    // NOTE: Padding is not applied when the range is missing, as multi-line
+    // status cannot be reliably determined.
     items.extend(gen_inner(context));
   }
+
+  items.push_info(before_close_token_ln);
 
   if let Some(generated_close_token) = (custom_close_token)(context) {
     items.extend(generated_close_token);

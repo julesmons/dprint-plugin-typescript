@@ -1,0 +1,26 @@
+~~ objectLiteral.padding.top: 2, objectLiteral.padding.bottom: 1 ~~
+== objectLiteral.padding.top: 2, objectLiteral.padding.bottom: 1 ==
+const obj = {
+    prop: 1
+};
+const obj2 = {/* comment */};
+const obj3 = {};
+const obj4 = {
+    // comment
+};
+
+[expect]
+const obj = {
+
+
+    prop: 1,
+
+};
+const obj2 = {/* comment */};
+const obj3 = {};
+const obj4 = {
+
+
+    // comment
+
+};

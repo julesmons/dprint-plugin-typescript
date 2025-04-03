@@ -1,0 +1,24 @@
+~~ blockStatement.padding.top: 1, blockStatement.padding.bottom: 1 ~~
+== block statement padding ==
+{
+    doSomething();
+}
+{/* c */}
+{}
+{
+    // c
+}
+
+[expect]
+{
+
+    doSomething();
+
+}
+{/* c */}
+{}
+{
+
+    // c
+
+}

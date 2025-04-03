@@ -1,0 +1,22 @@
+~~ ifStatement.padding.top: 1 ~~
+== ifStatement.padding.top: 1 ==
+if (true) {
+    doSomething();
+}
+if (true) {/* comment */}
+if (true) {}
+if (true) {
+    // comment
+}
+
+[expect]
+if (true) {
+
+    doSomething();
+}
+if (true) {/* comment */}
+if (true) {}
+if (true) {
+
+    // comment
+}

@@ -1,0 +1,32 @@
+~~ tryStatement.padding.top: 1, tryStatement.padding.bottom: 1, catchClause.padding.top: 1, catchClause.padding.bottom: 1, finallyClause.padding.top: 1, finallyClause.padding.bottom: 1 ~~
+== try/catch/finally padding ==
+try {
+    doTry();
+} catch(e) {
+    doCatch();
+} finally {
+    doFinally();
+}
+try {
+} catch {
+} finally {
+}
+
+[expect]
+try {
+
+    doTry();
+
+} catch (e) {
+
+    doCatch();
+
+} finally {
+
+    doFinally();
+
+}
+try {
+} catch {
+} finally {
+}

@@ -1,0 +1,50 @@
+~~ method.padding.top: 1, method.padding.bottom: 1 ~~
+== method padding (generic) ==
+class Test {
+    method() {
+        console.log("test");
+    }
+    get prop() { return 5; }
+    set prop(val) { console.log(val); }
+}
+const obj = {
+    method() { console.log("t"); },
+    get prop() { return 5; },
+    set prop(val) { console.log(val); }
+};
+
+[expect]
+class Test {
+    method() {
+
+        console.log("test");
+
+    }
+    get prop() {
+
+        return 5;
+
+    }
+    set prop(val) {
+
+        console.log(val);
+
+    }
+}
+const obj = {
+    method() {
+
+        console.log("t");
+
+    },
+    get prop() {
+
+        return 5;
+
+    },
+    set prop(val) {
+
+        console.log(val);
+
+    },
+};

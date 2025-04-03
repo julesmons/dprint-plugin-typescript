@@ -1,0 +1,28 @@
+~~ staticBlock.padding.top: 1, staticBlock.padding.bottom: 1 ~~
+== static block padding ==
+class Test {
+    static {
+        const a = 5;
+    }
+    static {}
+    static {/* c */}
+    static {
+        // c
+    }
+}
+
+[expect]
+class Test {
+    static {
+
+        const a = 5;
+
+    }
+    static {}
+    static {/* c */}
+    static {
+
+        // c
+
+    }
+}

@@ -1339,6 +1339,256 @@
     },
     "importDeclaration.forceMultiLine": {
       "$ref": "#/definitions/forceMultiLineSpecifiers"
+    },
+    "ifStatement.padding.top": {
+      "description": "Number of blank lines to insert at the top of an if statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "ifStatement.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of an if statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "functionDeclaration.padding.top": {
+      "description": "Number of blank lines to insert at the top of a function declaration's block.",
+      "type": "number",
+      "default": 0
+    },
+    "functionDeclaration.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a function declaration's block.",
+      "type": "number",
+      "default": 0
+    },
+    "functionExpression.padding.top": {
+      "description": "Number of blank lines to insert at the top of a function expression's block.",
+      "type": "number",
+      "default": 0
+    },
+    "functionExpression.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a function expression's block.",
+      "type": "number",
+      "default": 0
+    },
+    "arrowFunction.padding.top": {
+      "description": "Number of blank lines to insert at the top of an arrow function's block.",
+      "type": "number",
+      "default": 0
+    },
+    "arrowFunction.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of an arrow function's block.",
+      "type": "number",
+      "default": 0
+    },
+    "classDeclaration.padding.top": {
+      "description": "Number of blank lines to insert at the top of a class declaration's block.",
+      "type": "number",
+      "default": 0
+    },
+    "classDeclaration.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a class declaration's block.",
+      "type": "number",
+      "default": 0
+    },
+    "classExpression.padding.top": {
+      "description": "Number of blank lines to insert at the top of a class expression's block.",
+      "type": "number",
+      "default": 0
+    },
+    "classExpression.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a class expression's block.",
+      "type": "number",
+      "default": 0
+    },
+    "method.padding.top": {
+      "description": "Number of blank lines to insert at the top of a method's block (class methods, object methods, getters, setters).",
+      "type": "number",
+      "default": 0
+    },
+    "method.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a method's block (class methods, object methods, getters, setters).",
+      "type": "number",
+      "default": 0
+    },
+    "constructor.padding.top": {
+      "description": "Number of blank lines to insert at the top of a constructor's block.",
+      "type": "number",
+      "default": 0
+    },
+    "constructor.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a constructor's block.",
+      "type": "number",
+      "default": 0
+    },
+    "forStatement.padding.top": {
+      "description": "Number of blank lines to insert at the top of a for statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "forStatement.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a for statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "forInStatement.padding.top": {
+      "description": "Number of blank lines to insert at the top of a for...in statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "forInStatement.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a for...in statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "forOfStatement.padding.top": {
+      "description": "Number of blank lines to insert at the top of a for...of statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "forOfStatement.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a for...of statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "whileStatement.padding.top": {
+      "description": "Number of blank lines to insert at the top of a while statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "whileStatement.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a while statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "doWhileStatement.padding.top": {
+      "description": "Number of blank lines to insert at the top of a do...while statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "doWhileStatement.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a do...while statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "switchStatement.padding.top": {
+      "description": "Number of blank lines to insert at the top of a switch statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "switchStatement.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a switch statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "switchCase.padding.top": {
+      "description": "Number of blank lines to insert at the top of a switch case's block.",
+      "type": "number",
+      "default": 0
+    },
+    "switchCase.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a switch case's block.",
+      "type": "number",
+      "default": 0
+    },
+    "tryStatement.padding.top": {
+      "description": "Number of blank lines to insert at the top of a try statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "tryStatement.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a try statement's block.",
+      "type": "number",
+      "default": 0
+    },
+    "catchClause.padding.top": {
+      "description": "Number of blank lines to insert at the top of a catch clause's block.",
+      "type": "number",
+      "default": 0
+    },
+    "catchClause.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a catch clause's block.",
+      "type": "number",
+      "default": 0
+    },
+    "finallyClause.padding.top": {
+      "description": "Number of blank lines to insert at the top of a finally clause's block.",
+      "type": "number",
+      "default": 0
+    },
+    "finallyClause.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a finally clause's block.",
+      "type": "number",
+      "default": 0
+    },
+    "blockStatement.padding.top": {
+      "description": "Number of blank lines to insert at the top of a standalone block statement.",
+      "type": "number",
+      "default": 0
+    },
+    "blockStatement.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a standalone block statement.",
+      "type": "number",
+      "default": 0
+    },
+    "enumDeclaration.padding.top": {
+      "description": "Number of blank lines to insert at the top of an enum declaration's block.",
+      "type": "number",
+      "default": 0
+    },
+    "enumDeclaration.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of an enum declaration's block.",
+      "type": "number",
+      "default": 0
+    },
+    "interfaceDeclaration.padding.top": {
+      "description": "Number of blank lines to insert at the top of an interface declaration's block.",
+      "type": "number",
+      "default": 0
+    },
+    "interfaceDeclaration.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of an interface declaration's block.",
+      "type": "number",
+      "default": 0
+    },
+    "moduleDeclaration.padding.top": {
+      "description": "Number of blank lines to insert at the top of a module or namespace declaration's block.",
+      "type": "number",
+      "default": 0
+    },
+    "moduleDeclaration.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a module or namespace declaration's block.",
+      "type": "number",
+      "default": 0
+    },
+    "objectLiteral.padding.top": {
+      "description": "Number of blank lines to insert at the top of an object literal.",
+      "type": "number",
+      "default": 0
+    },
+    "objectLiteral.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of an object literal.",
+      "type": "number",
+      "default": 0
+    },
+    "arrayLiteral.padding.top": {
+      "description": "Number of blank lines to insert at the top of an array literal.",
+      "type": "number",
+      "default": 0
+    },
+    "arrayLiteral.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of an array literal.",
+      "type": "number",
+      "default": 0
+    },
+    "staticBlock.padding.top": {
+      "description": "Number of blank lines to insert at the top of a static block.",
+      "type": "number",
+      "default": 0
+    },
+    "staticBlock.padding.bottom": {
+      "description": "Number of blank lines to insert at the bottom of a static block.",
+      "type": "number",
+      "default": 0
     }
   }
 }

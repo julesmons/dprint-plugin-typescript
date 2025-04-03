@@ -1,0 +1,12 @@
+~~ ifStatement.padding.top: 1, ifStatement.padding.bottom: 1, ifStatement.useBraces: whenNotSingleLine, ifStatement.singleBodyPosition: sameLine ~~
+== Interaction: Single line block should not add padding ==
+if (true) console.log("test");
+
+[expect]
+if (true) console.log("test");
+
+== Interaction: Empty block should not add padding ==
+if (true) {}
+
+[expect]
+if (true) {}

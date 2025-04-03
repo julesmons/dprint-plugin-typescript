@@ -1,0 +1,26 @@
+~~ arrayLiteral.padding.top: 1, arrayLiteral.padding.bottom: 2 ~~
+== arrayLiteral.padding.top: 1, arrayLiteral.padding.bottom: 2 ==
+const arr = [
+    1
+];
+const arr2 = [/* comment */];
+const arr3 = [];
+const arr4 = [
+    // comment
+];
+
+[expect]
+const arr = [
+
+    1,
+
+
+];
+const arr2 = [/* comment */];
+const arr3 = [];
+const arr4 = [
+
+    // comment
+
+
+];
