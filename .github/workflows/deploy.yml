@@ -1,0 +1,43 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Build WASM file
+        id: build
+        run: cargo build --target wasm32-unknown-unknown --release --features "wasm" --verbose
+
+      - name: Consolidate built files
+        id: consolidate
+        run: |
+          mkdir ./_site
+          cp ./target/wasm32-unknown-unknown/release/dprint_plugin_typescript.wasm ./_site
+          cp ./deployment/schema.json ./_site
+
+      - name: Upload built files artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
